@@ -7,12 +7,12 @@ package echo.server;
 import java.net.ServerSocket;
 
 public class App {
-    public String getGreeting() {
-        return "Welcome to the Echo Server!";
-    }
+  public String getGreeting() {
+    return "Welcome to the Echo Server!";
+  }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-        ServerSocket serverSocket = EchoServer.startServer();
-    }
+  public static void main(String[] args) {
+    System.out.println(new App().getGreeting());
+    ServerSocket serverSocket = EchoServer.startServer();
+  }
 }
