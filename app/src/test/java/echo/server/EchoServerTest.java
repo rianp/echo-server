@@ -1,10 +1,7 @@
 package echo.server;
-
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.net.ServerSocket;
-
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class EchoServerTest {
