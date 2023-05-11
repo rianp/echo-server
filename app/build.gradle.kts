@@ -11,6 +11,12 @@ plugins {
     application
 }
 
+//java {
+//    toolchain {
+//        languageVersion.set(JavaLanguageVersion.of(20))
+//    }
+//}
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -33,34 +39,3 @@ tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
-
-// tasks {
-//     "copy"(Copy::class) {
-//         from("src/main/kotlin/io/jivimberg/githook/pre-push.kts") {
-//             rename { it.removeSuffix(".kts") }
-//         }
-//         into(".git/hooks")
-//     }
-
-//     "build" {
-//         dependsOn("copy")
-//     }
-// }
-//
-// task("installLocalGitHook", Copy::class) {
-//     from(File(rootProject.rootDir, "scripts/pre-push"))
-//     into(File(rootProject.rootDir, ".git/hooks"))
-//     fileMode = 0775
-// }
-
-// tasks.getByName("build").dependsOn("installLocalGitHook")
-
-// Rian copies/creates a scripts directoy in repo
-// add gradle task in build.gradle 
-// push to main
-
-// Claire pulls main
-// gradle build OR some sort specific gradle task in terminal
-//  it would copy into claire's .git directory
-
-// build.dependsOn installLocalGitHook
