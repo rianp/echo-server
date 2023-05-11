@@ -25,5 +25,6 @@ jobs:
         with:
           gradle-version: "8.1.1"
           arguments: build
-      - name: Checkstyle for Java
-        uses: dbelyaev/action-checkstyle@v0.7.5
+      - name: IntelliJ Format Checker
+        uses: sidhant92/intellij-format-action@v1
+
