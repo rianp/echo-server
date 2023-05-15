@@ -9,14 +9,11 @@ import java.net.ServerSocket;
 import static echo.server.EchoServer.startServer;
 
 public class App {
-  public String getGreeting() {
-    return "Welcome to the Echo Server!";
-  }
 
   public static void main(String[] args) {
-    System.out.println(new App().getGreeting());
-    System.out.println("Starting Server...");
+    Console.print("Welcome to the Echo Server!");
+    Console.print("Starting Server...");
     ServerSocket serverSocket = startServer(0);
-    System.out.println("Server Started!");
+    Console.print("Server Started!");
   }
 }

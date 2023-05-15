@@ -1,8 +1,6 @@
 package echo.server;
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
-import org.mockito.Mockito;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

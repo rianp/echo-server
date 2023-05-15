@@ -8,9 +8,4 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-  @Test
-  void Should_DisplayGreeting_When_AppStarts() {
-    App app = new App();
-    assertNotNull(app.getGreeting(), "Should display greeting when app starts");
-  }
 }
