@@ -6,6 +6,8 @@ package echo.server;
 
 import java.net.ServerSocket;
 
+import static echo.server.EchoServer.startServer;
+
 public class App {
   public String getGreeting() {
     return "Welcome to the Echo Server!";
@@ -13,6 +15,8 @@ public class App {
 
   public static void main(String[] args) {
     System.out.println(new App().getGreeting());
-    ServerSocket serverSocket = EchoServer.startServer();
+    System.out.println("Starting Server...");
+    ServerSocket serverSocket = startServer(0);
+    System.out.println("Server Started!");
   }
 }
