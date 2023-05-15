@@ -6,14 +6,12 @@ package echo.server;
 
 import java.net.ServerSocket;
 
-import static echo.server.EchoServer.startServer;
-
 public class App {
 
   public static void main(String[] args) {
     Console.print("Welcome to the Echo Server!");
     Console.print("Starting Server...");
-    ServerSocket serverSocket = startServer(0);
+    ServerSocket serverSocket = EchoServer.startServer(0);
     Console.print("Server Started!");
   }
 }
