@@ -9,6 +9,21 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    checkstyle
+}
+
+tasks {
+    javadoc {
+        options {
+            (this as CoreJavadocOptions).addStringOption("Xdoclint:none", "-quiet")
+        }
+    }
+}
+
+checkstyle {
+    configProperties = mapOf(
+            "checkstyle.suppression.files" to "javadoc.suppressions.xml"
+    )
 }
 
 //java {
@@ -43,3 +58,11 @@ tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+//tasks.withType<Checkstyle>().configureEach {
+//    reports {
+//        xml.required.set(false)
+//        html.required.set(true)
+//        html.stylesheet = resources.text.fromFile("config/checkstyle/checkstyle.xml")
+//    }
+//}

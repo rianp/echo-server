@@ -27,6 +27,8 @@ jobs:
           arguments: build
       - name: Checkstyle for Java
         uses: dbelyaev/action-checkstyle@v0.7.5
+        with:
+          checkstyle_config_path: $GITHUB_WORKSPACE/javadoc.suppressions.xml
 
 
 
