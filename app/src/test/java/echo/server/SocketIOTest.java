@@ -26,7 +26,7 @@ public class SocketIOTest {
   }
 
   @Test
-  public void should_CreateSocketInput_When_SocketInputGetsCreated() throws IOException {
+  public void should_CreateASocketInput_When_SocketReaderIsCreated() throws IOException {
     Mockito.when(clientSocket.getInputStream()).thenReturn(inputStream);
     Assertions.assertNotNull(SocketIO.createSocketReader(clientSocket));
   }
