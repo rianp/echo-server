@@ -7,10 +7,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -19,6 +16,9 @@ public class SocketIOTest {
   Socket clientSocket;
   @Mock
   InputStream inputStream;
+
+  @Mock
+  OutputStream outputStream;
 
   @BeforeEach
   public void setUp() {
@@ -38,4 +38,14 @@ public class SocketIOTest {
         new ByteArrayInputStream(inputString.getBytes())));
     Assertions.assertEquals("Hello", SocketIO.readFromInputStream(input));
   }
-}
+
+//  @Test
+//  public void should_CreateASocketOutput_When_SocketWriterIsCreated() throws IOException {
+//    Mockito.when(clientSocket.getOutputStream()).thenReturn(outputStream);
+//    SocketIO.createSocketOutput();
+//
+//
+////    Assertions.assertNotNull(SocketIO.createSocketReader(clientSocket));
+//
+//  }
+  }

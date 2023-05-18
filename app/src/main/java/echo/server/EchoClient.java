@@ -19,13 +19,15 @@ public class EchoClient {
     return socket;
   }
 
-  public static void sendClientMessageToServer(Socket socket, String message) {
+  public static PrintWriter sendClientMessageToServer(Socket socket, String message) {
 
     try (PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
       out.print(message);
+      return out;
     } catch (IOException e) {
       e.printStackTrace();
     }
+    return null;
   }
 }
 

@@ -16,13 +16,11 @@ public class AppTest {
 
     App.main(new String[0]);
 
-    String expectedOutput = """
-        Welcome to the Echo Server!
-        Starting Server...
-        Echo Server started and waiting for clients...\s
-        Connection established!
-        Enter message to echo please:\s
-        """;
+    String expectedOutput = "Welcome to the Echo Server!\n" +
+                            "Starting Server...\n" +
+                            "Echo Server started and waiting for clients... \n" +
+                            "Connection established!\n" +
+                            "Enter message to echo please: \n";
     Assertions.assertEquals(expectedOutput, outputStream.toString());
   }
 }
