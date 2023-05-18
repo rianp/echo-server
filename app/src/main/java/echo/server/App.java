@@ -4,12 +4,14 @@
 
 package echo.server;
 
+import java.net.ServerSocket;
+
 public class App {
-  public String getGreeting() {
-    return "Hello World!";
-  }
 
   public static void main(String[] args) {
-    System.out.println(new App().getGreeting());
+    Console.print("Welcome to the Echo Server!");
+    Console.print("Starting Server...");
+    ServerSocket serverSocket = EchoServer.startServer(0);
+    Console.print("Server Started!");
   }
 }
