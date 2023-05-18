@@ -7,6 +7,12 @@ plugins {
     application
 }
 
+//java {
+//    toolchain {
+//        languageVersion.set(JavaLanguageVersion.of(20))
+//    }
+//}
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -33,4 +39,3 @@ tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
-

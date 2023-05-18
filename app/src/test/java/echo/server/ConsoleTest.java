@@ -37,6 +37,7 @@ public class ConsoleTest {
     Assertions.assertEquals("Print", output);
   }
 
+
   @Test
   public void should_ReturnInputString_When_ProvidingInput() {
     String expectedInput = "test input";
