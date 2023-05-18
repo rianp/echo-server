@@ -12,13 +12,13 @@ plugins {
     checkstyle
 }
 
-tasks {
-    javadoc {
-        options {
-            (this as CoreJavadocOptions).addStringOption("Xdoclint:none", "-quiet")
-        }
-    }
-}
+//tasks {
+//    javadoc {
+//        options {
+//            (this as CoreJavadocOptions).addStringOption("Xdoclint:none", "-quiet")
+//        }
+//    }
+//}
 
 checkstyle {
     toolVersion = "10.11.0"
