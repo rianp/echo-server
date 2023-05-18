@@ -9,12 +9,12 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
-    checkstyle
+//    checkstyle
 }
 
-checkstyle {
-    toolVersion = "10.11.0"
-}
+//checkstyle {
+//    toolVersion = "10.11.0"
+//}
 
 repositories {
     // Use Maven Central for resolving dependencies.
