@@ -9,6 +9,11 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    checkstyle
+}
+
+checkstyle {
+    toolVersion = "10.11.0"
 }
 
 repositories {
