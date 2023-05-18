@@ -21,10 +21,14 @@ tasks {
 }
 
 checkstyle {
-    configProperties = mapOf(
-            "checkstyle.suppression.files" to "javadoc.suppressions.xml"
-    )
+    toolVersion = "10.11.0"
 }
+
+//checkstyle {
+//    configProperties = mapOf(
+//            "checkstyle.suppression.files" to "javadoc.suppressions.xml"
+//    )
+//}
 
 //java {
 //    toolchain {
