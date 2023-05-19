@@ -1,9 +1,7 @@
 package echo.server;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,7 +37,7 @@ public class ConsoleTest {
 
 
   @Test
-  public void should_ReturnInputString_When_ProvidingInput() {
+  public void should_ReturnInputString_When_ProvidingInput() throws IOException {
     String expectedInput = "test input";
 
     ByteArrayInputStream inputStream = new ByteArrayInputStream(expectedInput.getBytes());

@@ -7,7 +7,6 @@ package echo.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 
 class App {
   public static void main(final String[] args) throws IOException {
@@ -15,12 +14,11 @@ class App {
     Console.print("Starting Server...");
     ServerSocket serverSocket = EchoServer.startServerSocket(49151);
     Console.print("Echo Server started and waiting for clients... ");
-    Socket client = EchoClient.createSocket(49151);
-    Socket clientSocket = EchoServer.acceptClientSocket(serverSocket);
+    Socket clientConnection = EchoClient.requestSocket(49151);
+    Socket serverConnection = EchoServer.acceptClientConnectionRequest(serverSocket);
     Console.print("Connection established!");
     String message = Console.inputString("Enter message to echo please: ");
-    EchoClient.sendClientMessageToServer(client, message);
-    Scanner scanner = SocketIO.createSocketReader(clientSocket);
-    SocketIO.readFromInputStream(scanner);
+    EchoClient.sendClientMessageToServer(clientConnection, message);
+    String receivedMessage = SocketIO.readClientMessage(serverConnection);
   }
 }

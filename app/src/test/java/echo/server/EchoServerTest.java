@@ -33,7 +33,7 @@ public class EchoServerTest {
   @Test
   void should_AcceptClientSocket_When_ClientConnects() throws IOException {
     ServerSocket serverSocket = EchoServer.createSocket(9002);
-    Thread serverThread = new Thread(() -> EchoServer.acceptClientSocket(serverSocket));
+    Thread serverThread = new Thread(() -> EchoServer.acceptClientConnectionRequest(serverSocket));
     serverThread.start();
     Socket clientSocket = new Socket("localhost", 9002);
 

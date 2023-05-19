@@ -9,14 +9,14 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class EchoClient {
-  public static Socket createSocket(int port) {
-    Socket socket;
+  public static Socket requestSocket(int port) {
+    Socket clientSocket;
     try {
-      socket = new Socket("localhost", port);
+      clientSocket = new Socket("localhost", port);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    return socket;
+    return clientSocket;
   }
 
   public static void sendClientMessageToServer(Socket socket, String message) {

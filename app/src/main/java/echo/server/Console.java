@@ -14,17 +14,9 @@ public class Console {
     System.out.println(output);
   }
 
-  protected static String inputString(String string) {
-    print(string);
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    String inputString = "";
-
-    try {
-      inputString = reader.readLine();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    return inputString;
+  protected static String inputString(String prompt) throws IOException {
+    BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+    print(prompt);
+    return userInput.readLine();
   }
 }

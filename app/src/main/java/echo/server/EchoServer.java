@@ -19,7 +19,7 @@ public class EchoServer {
     return serverSocket;
   }
 
-  public static Socket acceptClientSocket(ServerSocket server) {
+  public static Socket acceptClientConnectionRequest(ServerSocket server) {
     Socket clientSocket;
     try {
       clientSocket = server.accept();

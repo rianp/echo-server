@@ -43,7 +43,7 @@ public class EchoClientTest {
   void should_ThrowRuntimeException_When_ServerFailsToStart() {
     int port = 12345;
 
-    Assertions.assertThrows(RuntimeException.class, () -> EchoClient.createSocket(port));
+    Assertions.assertThrows(RuntimeException.class, () -> EchoClient.requestSocket(port));
   }
 
   @Test
