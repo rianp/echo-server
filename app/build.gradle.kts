@@ -8,9 +8,9 @@ plugins {
     checkstyle
 }
 
-checkstyle {
-    configFile = file("config/checkstyle/checkstyle.xml")
-}
+//checkstyle {
+//    configFile = file("config/checkstyle/checkstyle.xml")
+//}
 
 repositories {
     // Use Maven Central for resolving dependencies.
