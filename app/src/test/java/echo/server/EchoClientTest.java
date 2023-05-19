@@ -45,21 +45,4 @@ public class EchoClientTest {
 
     Assertions.assertThrows(RuntimeException.class, () -> EchoClient.requestSocket(port));
   }
-
-  @Test
-  void should_SendClientMessageToServer_When_ClientHasInputMessage() {
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    Socket socket = Mockito.mock(Socket.class);
-    try {
-      Mockito.when(socket.getOutputStream()).thenReturn(outputStream);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-    String message = "Test message";
-
-    EchoClient.sendClientMessageToServer(socket, message);
-
-    String actualOutput = outputStream.toString();
-    Assertions.assertEquals(message, actualOutput);
-  }
 }

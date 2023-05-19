@@ -4,28 +4,28 @@
 
 package echo.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 public class SocketIO {
-  public static String readClientMessage(Socket serverConnection) {
+  public static String readMessage(Socket serverConnection) {
     String string = "";
-    try (BufferedReader out = new BufferedReader(new InputStreamReader(serverConnection.getInputStream()))) {
-      string = out.readLine();
+    try {
+      InputStream inputStream = serverConnection.getInputStream();
+      BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+      string = reader.readLine();
     } catch (IOException e) {
       e.printStackTrace();
     }
     return string;
   }
 
-  public static PrintWriter createSocketWriter(Socket socket) throws IOException {
-    return new PrintWriter(socket.getOutputStream(), true);
-  }
+  public static void sendMessage(Socket socket, String message) {
 
-  public static void writeToOutputStream(PrintWriter output, String data) {
-    output.println(data);
+    try (PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
+      out.print(message);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

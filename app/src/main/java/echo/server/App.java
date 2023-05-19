@@ -19,7 +19,11 @@ class App {
     Socket serverConnection = EchoServer.acceptClientConnectionRequest(serverSocket);
     Console.print("Connection established!");
     String message = Console.inputString("Enter message to echo please: ");
-    EchoClient.sendClientMessageToServer(clientConnection, message);
-    String receivedMessage = SocketIO.readClientMessage(serverConnection);
+    SocketIO.sendMessage(clientConnection, message);
+//    System.out.println("Socket is closed: " + serverConnection.isClosed());
+    String receivedMessage = SocketIO.readMessage(serverConnection);
+    SocketIO.sendMessage(serverConnection, receivedMessage);
+    String serverMessage = SocketIO.readMessage(clientConnection);
+    Console.print(serverMessage);
   }
 }
