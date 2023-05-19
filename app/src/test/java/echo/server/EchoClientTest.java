@@ -1,15 +1,15 @@
 package echo.server;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import org.mockito.Mockito;
 
 public class EchoClientTest {
 
@@ -51,9 +51,9 @@ public class EchoClientTest {
   @Test
   void should_SendClientMessageToServer_When_ClientHasInputMessage() {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    Socket socket = mock(Socket.class);
+    Socket socket = Mockito.mock(Socket.class);
     try {
-      when(socket.getOutputStream()).thenReturn(outputStream);
+      Mockito.when(socket.getOutputStream()).thenReturn(outputStream);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
