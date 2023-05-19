@@ -5,13 +5,12 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    checkstyle
 }
 
-//java {
-//    toolchain {
-//        languageVersion.set(JavaLanguageVersion.of(20))
-//    }
-//}
+checkstyle {
+    configFile = file("config/checkstyle/checkstyle.xml")
+}
 
 repositories {
     // Use Maven Central for resolving dependencies.
