@@ -1,6 +1,0 @@
-
-<suppressions>
-    <!-- Suppress JavadocType checks for all files -->
-    <suppress checks="JavadocType" files="."/>
-    <suppress message="Missing a Javadoc comment"/>
-</suppressions>
