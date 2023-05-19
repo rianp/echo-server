@@ -25,5 +25,6 @@ jobs:
         with:
           gradle-version: "8.1.1"
           arguments: build
-      - name: Run checkstyle (Code Standard) with reviewdog
-        uses: asaasdev/checkstyle-action@v1.1.0
+      - name: Run Checkstyle with filter
+        uses: iwata-n/actions-checkstyle@v1.0.0
+
