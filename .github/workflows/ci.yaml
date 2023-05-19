@@ -27,5 +27,3 @@ jobs:
           arguments: build
       - name: Run checkstyle (Code Standard) with reviewdog
         uses: asaasdev/checkstyle-action@v1.1.0
-#        with:
-#          checkstyle_config_path: $GITHUB_WORKSPACE/config/checkstyle/checkstyle.xml
