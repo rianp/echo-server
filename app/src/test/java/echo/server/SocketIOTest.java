@@ -1,8 +1,12 @@
 package echo.server;
 
+<<<<<<< HEAD
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+=======
+import java.io.*;
+>>>>>>> 3df74d9 (initial echo set up)
 import java.net.Socket;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +15,15 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 public class SocketIOTest {
+<<<<<<< HEAD
+=======
+  @Mock
+  Socket clientSocket;
+  @Mock
+  InputStream inputStream;
+  @Mock
+  OutputStream outputStream;
+>>>>>>> 3df74d9 (initial echo set up)
 
   @BeforeEach
   public void setUp() {
@@ -35,5 +48,21 @@ public class SocketIOTest {
     String result = SocketIO.readClientMessage(clientSocket);
 
     Assertions.assertEquals("Hello", result);
+  }
+
+  @Test
+  public void testSocketOutputGetsCreated() throws IOException {
+    Mockito.when(clientSocket.getOutputStream()).thenReturn(outputStream);
+    Assertions.assertNotNull(SocketIO.createSocketWriter(clientSocket));
+  }
+
+  @Test
+  public void testWriteClientStreamLine() {
+    String inputString = "World";
+    ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    PrintWriter printWriter = new PrintWriter(
+        outContent, true);
+    SocketIO.writeToOutputStream(printWriter, inputString);
+    Assertions.assertEquals("World\n", outContent.toString());
   }
 }
