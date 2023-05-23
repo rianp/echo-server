@@ -1,11 +1,11 @@
-package echo.server;
-
-import java.io.*;
+package echo.client;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.*;
 
 public class ConsoleTest {
   Console console = new Console();

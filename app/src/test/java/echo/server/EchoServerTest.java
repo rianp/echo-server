@@ -8,16 +8,18 @@ import org.junit.jupiter.api.Test;
 
 
 public class EchoServerTest {
+  EchoServer echoServer = new EchoServer();
+
   @Test
   void should_CreateServerSocket_When_ServerStarts() throws IOException {
-    ServerSocket serverSocket = EchoServer.createSocket(0);
+    ServerSocket serverSocket = echoServer.startServerSocket(0);
     Assertions.assertNotNull(serverSocket, "Should create server socket when the server starts");
     serverSocket.close();
   }
 
   @Test
   public void should_CreateServerSocket_With_SpecificPort() throws IOException {
-    ServerSocket serverSocket = EchoServer.createSocket(9001);
+    ServerSocket serverSocket = echoServer.startServerSocket(9001);
     Assertions.assertEquals(serverSocket.getLocalPort(), 9001);
     serverSocket.close();
   }
@@ -26,14 +28,14 @@ public class EchoServerTest {
   void should_ThrowRuntimeException_When_ServerFailsToStart() {
     int port = 12345;
 
-    EchoServer.startServerSocket(port);
-    Assertions.assertThrows(RuntimeException.class, () -> EchoServer.startServerSocket(port));
+    echoServer.startServerSocket(port);
+    Assertions.assertThrows(RuntimeException.class, () -> echoServer.startServerSocket(port));
   }
 
   @Test
   void should_AcceptClientSocket_When_ClientConnects() throws IOException {
-    ServerSocket serverSocket = EchoServer.createSocket(9002);
-    Thread serverThread = new Thread(() -> EchoServer.acceptClientConnectionRequest(serverSocket));
+    ServerSocket serverSocket = echoServer.startServerSocket(9002);
+    Thread serverThread = new Thread(() -> echoServer.acceptClientConnectionRequest(serverSocket));
     serverThread.start();
     Socket clientSocket = new Socket("localhost", 9002);
 

@@ -1,7 +1,4 @@
-package echo.server;
-
-import java.io.*;
-import java.net.Socket;
+package echo.client;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,10 +6,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-public class SocketIOTest {
-  SocketIO socketIO = new SocketIO();
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
 
-  @BeforeEach
+public class SocketIOTest {
+
+  SocketIO socketIO = new SocketIO();
   public void setUp() {
     MockitoAnnotations.openMocks(this);
   }

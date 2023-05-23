@@ -9,17 +9,17 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class EchoServer {
-  public static ServerSocket startServerSocket(int port) {
+  public ServerSocket startServerSocket(int port) {
     ServerSocket serverSocket;
     try {
-      serverSocket = createSocket(port);
+      serverSocket = new ServerSocket(port);
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
     return serverSocket;
   }
 
-  public static Socket acceptClientConnectionRequest(ServerSocket server) {
+  public Socket acceptClientConnectionRequest(ServerSocket server) {
     Socket clientSocket;
     try {
       clientSocket = server.accept();
@@ -27,9 +27,5 @@ public class EchoServer {
       throw new RuntimeException(e);
     }
     return clientSocket;
-  }
-
-  protected static ServerSocket createSocket(int port) throws IOException {
-    return new ServerSocket(port);
   }
 }

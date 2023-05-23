@@ -2,7 +2,7 @@
  *
  */
 
-package echo.server;
+package echo.client;
 
 import java.io.*;
 import java.net.Socket;
@@ -23,6 +23,6 @@ public class SocketIO {
   public void sendMessage(Socket socket, String message) throws IOException {
 
     PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-    out.println("server says: " + message);
+    out.println(message);
   }
 }

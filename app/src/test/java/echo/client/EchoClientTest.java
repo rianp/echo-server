@@ -1,16 +1,17 @@
-package echo.server;
+package echo.client;
 
-import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class EchoClientTest {
 
+  EchoClient echoClient = new EchoClient();
   private ServerSocket serverSocket;
   private int serverPort;
 
@@ -43,6 +44,6 @@ public class EchoClientTest {
   void should_ThrowRuntimeException_When_ServerFailsToStart() {
     int port = 12345;
 
-    Assertions.assertThrows(RuntimeException.class, () -> EchoClient.requestSocket(port));
+    Assertions.assertThrows(RuntimeException.class, () -> echoClient.requestSocket(port));
   }
 }
