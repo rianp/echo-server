@@ -1,46 +1,72 @@
 package echo.server;
 
+import echo.Console;
+import echo.SocketIO;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 
 public class EchoServerTest {
-  EchoServer echoServer = new EchoServer();
+  SocketIO mockSocketIO = Mockito.mock(SocketIO.class);
+  ServerSocket mockServerSocket = Mockito.mock(ServerSocket.class);
+  Console mockConsole = Mockito.mock(Console.class);
+  EchoServer echoServer = new EchoServer(mockConsole, mockServerSocket, mockSocketIO);
 
-  @Test
-  void should_CreateServerSocket_When_ServerStarts() throws IOException {
-    ServerSocket serverSocket = echoServer.startServerSocket(0);
-    Assertions.assertNotNull(serverSocket, "Should create server socket when the server starts");
-    serverSocket.close();
+  public void testSetUp() throws IOException {
+    Mockito.when(mockServerSocket.accept()).thenReturn(new Socket());
   }
 
   @Test
-  public void should_CreateServerSocket_With_SpecificPort() throws IOException {
-    ServerSocket serverSocket = echoServer.startServerSocket(9001);
-    Assertions.assertEquals(serverSocket.getLocalPort(), 9001);
-    serverSocket.close();
+  void should_return_socket_when_acceptClientConnection_is_called() throws IOException {
+    testSetUp();
+    Socket testClientSocket = echoServer.acceptClientConnectionRequest();
+
+    Assertions.assertEquals(testClientSocket.getClass(), Socket.class);
+
+    mockServerSocket.close();
+  }
+
+  // describe start()
+
+  @Test
+  void should_AcceptClientConnection() throws IOException {
+    EchoServer echoSpy = Mockito.spy(echoServer);
+    echoSpy.start();
+
+    Mockito.verify(echoSpy).acceptClientConnectionRequest();
   }
 
   @Test
-  void should_ThrowRuntimeException_When_ServerFailsToStart() {
-    int port = 12345;
+  void should_printConnectionMessage() throws IOException {
+    echoServer.start();
 
-    echoServer.startServerSocket(port);
-    Assertions.assertThrows(RuntimeException.class, () -> echoServer.startServerSocket(port));
+    Mockito.verify(mockConsole).print("Connection established!");
   }
 
   @Test
-  void should_AcceptClientSocket_When_ClientConnects() throws IOException {
-    ServerSocket serverSocket = echoServer.startServerSocket(9002);
-    Thread serverThread = new Thread(() -> echoServer.acceptClientConnectionRequest(serverSocket));
-    serverThread.start();
-    Socket clientSocket = new Socket("localhost", 9002);
+  void should_receiveMessage() throws IOException {
+    echoServer.start();
 
-    Assertions.assertTrue(clientSocket.isConnected(),
-        "Client should be able to connect to the server");
-    serverSocket.close();
+    Mockito.verify(mockSocketIO).readMessage(null);
+  }
+
+  @Test
+  void should_printReceivedMessage() throws IOException {
+    echoServer.start();
+
+    Mockito.verify(mockConsole).print(null);
+  }
+
+  @Test
+  void should_sendMessage() throws IOException {
+    echoServer.start();
+
+    Mockito.verify(mockSocketIO).sendMessage(null, null);
   }
 }

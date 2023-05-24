@@ -4,26 +4,21 @@
 
 package echo.client;
 
+import echo.Console;
+import echo.SocketIO;
 import java.io.IOException;
 import java.net.Socket;
 
 class ClientRunner {
-  EchoClient echoClient = new EchoClient();
-  Console console = new Console();
-  SocketIO socketIO = new SocketIO();
-  public void main(final String[] args) throws IOException {
 
-    while (true) {
-      Socket clientConnection = echoClient.requestSocket(49151);
-      console.print("Connection established!");
-      String message = console.inputString("Enter message to echo please: ");
-      socketIO.sendMessage(clientConnection, message);
-      String echo = socketIO.readMessage(clientConnection);
-      console.print(echo);
-    }
+  public static void main(final String[] args) throws IOException {
+    Console console = new Console();
+    SocketIO socketIO = new SocketIO();
+
+    console.print("Welcome to the Echo Client!\nRequesting Server Connection...");
+    Socket clientSocket = new Socket("localhost", 49151);
+    console.print("Connection established!");
+    EchoClient echoClient = new EchoClient(console, clientSocket, socketIO);
+    echoClient.start();
   }
 }
-
-//    System.out.println("Socket is closed: " + serverConnection.isClosed());
-
-// write a wrapper for server and for client

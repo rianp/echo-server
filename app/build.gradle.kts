@@ -5,6 +5,7 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    id("com.adarshr.test-logger") version "3.2.0"
 }
 
 repositories {

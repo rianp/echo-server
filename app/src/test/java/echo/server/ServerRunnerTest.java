@@ -4,9 +4,9 @@ import java.io.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ServerRunnerTest {
-  ServerRunner serverRunner = new ServerRunner();
-
+//public class ServerRunnerTest {
+//  private ServerRunner = new ServerRunner();
+//
 //  @Test
 //  public void should_ReceiveUserInput_When_ServerStarts() throws IOException {
 //    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -17,13 +17,10 @@ public class ServerRunnerTest {
 //
 //    serverRunner.main(new String[0]);
 //
-//    String expectedOutput = """
-//        Welcome to the Echo Server!
-//        Starting Server...
-//        Echo Server started and waiting for clients...\s
-//        Connection established!
-//        Enter message to echo please:\s
-//        """;
+//    String expectedOutput = "Welcome to the Echo Server!\n" +
+//        "Starting Server...\n" +
+//        "Echo Server started and waiting for clients...\n" +
+//        "Connection established!\n";
 //    Assertions.assertEquals(expectedOutput, outputStream.toString());
 //  }
-}
+//}

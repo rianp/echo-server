@@ -2,7 +2,7 @@
  *
  */
 
-package echo.client;
+package echo;
 
 import java.io.*;
 import java.net.Socket;

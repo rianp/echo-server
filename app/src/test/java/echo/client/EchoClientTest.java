@@ -1,49 +1,52 @@
 package echo.client;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import echo.Console;
+import echo.SocketIO;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 public class EchoClientTest {
+  SocketIO mockSocketIO = Mockito.mock(SocketIO.class);
+  Socket mockSocket = Mockito.mock(Socket.class);
+  Console mockConsole = Mockito.mock(Console.class);
+  EchoClient echoClient = new EchoClient(mockConsole, mockSocket, mockSocketIO);
 
-  EchoClient echoClient = new EchoClient();
-  private ServerSocket serverSocket;
-  private int serverPort;
+  // describe start()
 
+  @Test
+  void should_printConnectionMessage() throws IOException {
+    echoClient.start();
 
-  @BeforeEach
-  void setupServer() throws IOException {
-    serverPort = 9001;
-    serverSocket = new ServerSocket(serverPort);
-  }
-
-  @AfterEach
-  void shutdownServer() throws IOException {
-    serverSocket.close();
+    Mockito.verify(mockConsole).inputString("Enter message to echo please: ");
   }
 
   @Test
-  void should_CreateClientSocket_When_ServerStarts() throws IOException {
-    Socket clientSocket = new Socket("localhost", serverPort);
-    clientSocket.close();
+  void should_sendMessage() throws IOException {
+    String expectedInput = "test input";
+
+    ByteArrayInputStream inputStream = new ByteArrayInputStream(expectedInput.getBytes());
+    System.setIn(inputStream);
+
+    echoClient.start();
+
+    Mockito.verify(mockSocketIO).sendMessage(mockSocket, null);
   }
 
   @Test
-  void should_CreateClientSocket_With_SpecificPort() throws IOException {
-    final int testPort = 9001;
-    Socket testClientSocket = new Socket("localhost", testPort);
-    testClientSocket.close();
+  void should_receiveMessage() throws IOException {
+    echoClient.start();
+
+    Mockito.verify(mockSocketIO).readMessage(mockSocket);
   }
 
   @Test
-  void should_ThrowRuntimeException_When_ServerFailsToStart() {
-    int port = 12345;
+  void should_printReceivedMessage() throws IOException {
+    echoClient.start();
 
-    Assertions.assertThrows(RuntimeException.class, () -> echoClient.requestSocket(port));
+    Mockito.verify(mockConsole).print(null);
   }
 }

@@ -2,7 +2,7 @@
  *
  */
 
-package echo.server;
+package echo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class Console {
     System.out.println(output);
   }
 
-  protected String inputString(String prompt) throws IOException {
+  public String inputString(String prompt) throws IOException {
     BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
     print(prompt);
     return userInput.readLine();
