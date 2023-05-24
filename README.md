@@ -40,7 +40,7 @@ gradle run
 
 ### Running Tests in Bash
 1. Make sure you're in the project directory.
-Run the tests using Gradle:
+   Run the tests using Gradle:
 ```bash
 gradle test
 ```

@@ -15,8 +15,6 @@ public class EchoClientTest {
   Console mockConsole = Mockito.mock(Console.class);
   EchoClient echoClient = new EchoClient(mockConsole, mockSocket, mockSocketIO);
 
-  // describe start()
-
   @Test
   void should_printConnectionMessage() throws IOException {
     echoClient.start();

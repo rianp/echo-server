@@ -46,6 +46,6 @@ public class SocketIOTest {
     socketIO.sendMessage(socket, message);
 
     String actualOutput = outputStream.toString();
-    Assertions.assertEquals("server says: Test message\n", actualOutput);
+    Assertions.assertEquals("Test message\n", actualOutput);
   }
 }

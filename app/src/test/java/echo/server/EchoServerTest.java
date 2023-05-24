@@ -32,7 +32,6 @@ public class EchoServerTest {
     mockServerSocket.close();
   }
 
-  // describe start()
 
   @Test
   void should_AcceptClientConnection() throws IOException {
