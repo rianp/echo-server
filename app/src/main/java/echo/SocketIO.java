@@ -4,11 +4,11 @@ import java.io.*;
 import java.net.Socket;
 
 public class SocketIO {
+
   public String readMessage(Socket serverConnection) {
     String string = "";
     try {
-      InputStream inputStream = serverConnection.getInputStream();
-      BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+      BufferedReader reader = new BufferedReader(new InputStreamReader(serverConnection.getInputStream()));
       string = reader.readLine();
     } catch (IOException e) {
       e.printStackTrace();
