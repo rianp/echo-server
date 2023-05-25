@@ -1,31 +1,78 @@
 package echo.server;
 
-import java.io.IOException;
-import java.net.ServerSocket;
+import echo.Console;
+import echo.SocketIO;
+
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 public class EchoServerTest {
-  @Test
-  void should_CreateServerSocket_When_ServerStarts() throws IOException {
-    ServerSocket serverSocket = EchoServer.createSocket(0);
-    Assertions.assertNotNull(serverSocket, "Should create server socket when the server starts");
+  SocketIO mockSocketIO = mock(SocketIO.class);
+  ServerSocket mockServerSocket = mock(ServerSocket.class);
+  Console mockConsole = mock(Console.class);
+  EchoServer echoServer = new EchoServer(mockConsole, mockServerSocket, mockSocketIO);
+
+  public void testSetUp() throws IOException {
+    when(mockServerSocket.accept()).thenReturn(new Socket());
   }
 
   @Test
-  public void should_CreateServerSocket_When_SpecificPortIsUsedForSocket() throws IOException {
-    final int testPort = 9001;
-    ServerSocket testServerSocket =
-        EchoServer.createSocket(testPort);
-    Assertions.assertEquals(testServerSocket.getLocalPort(), testPort);
+  @DisplayName("should return a socket when a client connection is made")
+  void should_ReturnSocket_When_ClientConnectionIsMade() throws IOException {
+    testSetUp();
+    Socket testClientSocket = echoServer.acceptClientConnectionRequest();
+
+    assertEquals(testClientSocket.getClass(), Socket.class);
+
+    mockServerSocket.close();
   }
 
   @Test
-  void should_ThrowRuntimeException_When_ServerFailsToStart() {
-    int port = 12345;
+  @DisplayName("should accept client connection when echo server starts")
+  void should_AcceptClientConnection() throws IOException {
+    EchoServer echoSpy = spy(echoServer);
+    echoSpy.start();
 
-    EchoServer.startServer(port);
-    Assertions.assertThrows(RuntimeException.class, () -> EchoServer.startServer(port));
+    verify(echoSpy).acceptClientConnectionRequest();
+  }
+
+  @Test
+  @DisplayName("should print a connection message when echo server starts")
+  void should_printConnectionMessage() throws IOException {
+    echoServer.start();
+
+    verify(mockConsole).print("Connection established!");
+  }
+
+  @Test
+  @DisplayName("should be able to receive a message when echo server starts")
+  void should_receiveMessage() throws IOException {
+    echoServer.start();
+
+    verify(mockSocketIO).readMessage(null);
+  }
+
+  @Test
+  @DisplayName("should be able to print a received message when echo server starts")
+  void should_printReceivedMessage() throws IOException {
+    echoServer.start();
+
+    verify(mockConsole).print(null);
+  }
+
+  @Test
+  @DisplayName("should be able to send a message when echo server starts")
+  void should_sendMessage() throws IOException {
+    echoServer.start();
+
+    verify(mockSocketIO).sendMessage(null, null);
   }
 }

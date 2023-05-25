@@ -1,20 +1,39 @@
 package echo.server;
 
+import echo.SocketIO;
+
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
+import echo.Console;
 
 public class EchoServer {
-  public static ServerSocket startServer(int port) {
-    ServerSocket result;
+
+  private final Console console;
+  private final SocketIO socketIO;
+  private final ServerSocket serverSocket;
+
+  public EchoServer(Console console, ServerSocket serverSocket, SocketIO socketIO) {
+    this.console = console;
+    this.socketIO = socketIO;
+    this.serverSocket = serverSocket;
+  }
+
+  public void start() throws IOException {
+    Socket serverConnection = this.acceptClientConnectionRequest();
+    console.print("Connection established!");
+    String receivedMessage = socketIO.readMessage(serverConnection);
+    console.print(receivedMessage);
+    socketIO.sendMessage(serverConnection, receivedMessage);
+  }
+
+  public Socket acceptClientConnectionRequest() {
+    Socket clientSocket;
     try {
-      result = createSocket(port);
+      clientSocket = this.serverSocket.accept();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    return result;
-  }
-
-  protected static ServerSocket createSocket(int port) throws IOException {
-    return new ServerSocket(port);
+    return clientSocket;
   }
 }
