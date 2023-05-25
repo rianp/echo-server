@@ -1,7 +1,3 @@
-/*
- *
- */
-
 package echo.server;
 
 import echo.SocketIO;

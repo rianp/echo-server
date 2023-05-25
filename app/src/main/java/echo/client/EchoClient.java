@@ -1,7 +1,3 @@
-/*
- *
- */
-
 package echo.client;
 
 import echo.Console;

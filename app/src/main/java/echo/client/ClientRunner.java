@@ -1,7 +1,3 @@
-/*
- *
- */
-
 package echo.client;
 
 import echo.Console;
@@ -9,7 +5,7 @@ import echo.SocketIO;
 import java.io.IOException;
 import java.net.Socket;
 
-class ClientRunner {
+public class ClientRunner {
 
   public static void main(final String[] args) throws IOException {
     Console console = new Console();

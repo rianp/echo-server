@@ -1,7 +1,3 @@
-/*
- *
- */
-
 package echo;
 
 import java.io.BufferedReader;
