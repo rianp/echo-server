@@ -6,14 +6,14 @@ import java.net.Socket;
 public class SocketIO {
 
   public String readMessage(Socket serverConnection) {
-    String string = "";
+    String message = "";
     try {
       BufferedReader reader = new BufferedReader(new InputStreamReader(serverConnection.getInputStream()));
-      string = reader.readLine();
+      message = reader.readLine();
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return string;
+    return message;
   }
 
   public void sendMessage(Socket socket, String message) throws IOException {

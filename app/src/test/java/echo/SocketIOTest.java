@@ -21,8 +21,8 @@ public class SocketIOTest {
   @Test
   @DisplayName("should read a message when a message is sent")
   public void should_ReadMessage_When_MessageIsSent() throws IOException {
-    String inputString = "Hello\n";
-    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(inputString.getBytes());
+    String input = "Hello\n";
+    ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
     when(mockSocket.getInputStream()).thenReturn(mockInputStream);
     when(mockInputStream.read(any(byte[].class), anyInt(), anyInt()))
         .thenAnswer(invocation -> byteArrayInputStream.read(
