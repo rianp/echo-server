@@ -1,5 +1,7 @@
 package echo;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +11,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ConsoleTest {
   Console console = new Console();
+  private PrintStream originalSystemOut;
+  private InputStream originalSystemIn;
+
+  @BeforeEach
+  public void setUp() {
+    originalSystemOut = System.out;
+    originalSystemIn = System.in;
+  }
+
+  @AfterEach
+  public void tearDown() {
+    System.setOut(originalSystemOut);
+    System.setIn(originalSystemIn);
+  }
 
   @Test
   @DisplayName("should output a string that matches the provided input")

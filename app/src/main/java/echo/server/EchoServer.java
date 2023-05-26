@@ -12,6 +12,7 @@ public class EchoServer {
   private final Console console;
   private final SocketIO socketIO;
   private final ServerSocket serverSocket;
+  private Socket serverConnection;
 
   public EchoServer(Console console, ServerSocket serverSocket, SocketIO socketIO) {
     this.console = console;
@@ -20,11 +21,12 @@ public class EchoServer {
   }
 
   public void start() throws IOException {
+    String message;
     Socket serverConnection = this.acceptClientConnectionRequest();
     console.print("Connection established!");
-    String receivedMessage = socketIO.readMessage(serverConnection);
-    console.print(receivedMessage);
-    socketIO.sendMessage(serverConnection, receivedMessage);
+    while ((message = socketIO.readMessage(serverConnection)) != null) {
+      socketIO.sendMessage(serverConnection, message);
+    }
   }
 
   public Socket acceptClientConnectionRequest() {

@@ -18,10 +18,16 @@ public class EchoClient {
   }
 
   public void start() throws IOException {
-    String message = console.inputString("Enter message to echo please: ");
-    socketIO.sendMessage(socket, message);
-    String echo = socketIO.readMessage(socket);
-    console.print(echo);
+    while (true) {
+      String message = console.inputString("Enter a message to echo, or 'quit' to exit: ");
+      if ("quit".equals(message)) {
+        break;
+      }
+      socketIO.sendMessage(socket, message);
+      String echo = socketIO.readMessage(socket);
+      console.print(echo);
+    }
+    socket.close();
   }
 }
 

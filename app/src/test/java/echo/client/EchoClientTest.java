@@ -5,7 +5,6 @@ import echo.SocketIO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.Socket;
 
@@ -19,39 +18,43 @@ public class EchoClientTest {
   EchoClient echoClient = new EchoClient(mockConsole, mockSocket, mockSocketIO);
 
   @Test
-  @DisplayName("should print a connection message")
-  void should_printConnectionMessage() throws IOException {
-    echoClient.start();
-
-    verify(mockConsole).inputString("Enter message to echo please: ");
-  }
-
-  @Test
   @DisplayName("should be able to send a message")
   void should_sendMessage() throws IOException {
     String expectedInput = "test input";
-
-    ByteArrayInputStream inputStream = new ByteArrayInputStream(expectedInput.getBytes());
-    System.setIn(inputStream);
+    when(mockConsole.inputString("Enter a message to echo, or 'quit' to exit: "))
+        .thenReturn(expectedInput)
+        .thenReturn("quit");
 
     echoClient.start();
 
-    verify(mockSocketIO).sendMessage(mockSocket, null);
+    verify(mockSocketIO).sendMessage(mockSocket, expectedInput);
   }
 
-  @Test
-  @DisplayName("should be able to receive a message")
-  void should_receiveMessage() throws IOException {
-    echoClient.start();
-
-    verify(mockSocketIO).readMessage(mockSocket);
-  }
-
-  @Test
+   @Test
   @DisplayName("should be able to print received message")
   void should_printReceivedMessage() throws IOException {
+    String expectedInput = "test input";
+    when(mockConsole.inputString("Enter a message to echo, or 'quit' to exit: "))
+        .thenReturn(expectedInput)
+        .thenReturn("quit");
+
+    String echoedMessage = "echoed message";
+    when(mockSocketIO.readMessage(mockSocket)).thenReturn(echoedMessage);
+
     echoClient.start();
 
-    verify(mockConsole).print(null);
+    verify(mockConsole).print(echoedMessage);
+  }
+
+  @Test
+  @DisplayName("should exit immediately if 'quit' is the first input")
+  void shouldExitImmediately() throws IOException {
+    when(mockConsole.inputString("Enter a message to echo, or 'quit' to exit: "))
+        .thenReturn("quit");
+
+    echoClient.start();
+
+    verify(mockSocketIO, never()).sendMessage(any(Socket.class), anyString());
+    verify(mockSocket, times(1)).close();
   }
 }

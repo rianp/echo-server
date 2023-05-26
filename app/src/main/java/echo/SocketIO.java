@@ -4,16 +4,16 @@ import java.io.*;
 import java.net.Socket;
 
 public class SocketIO {
+
   public String readMessage(Socket serverConnection) {
-    String string = "";
+    String message = "";
     try {
-      InputStream inputStream = serverConnection.getInputStream();
-      BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-      string = reader.readLine();
+      BufferedReader reader = new BufferedReader(new InputStreamReader(serverConnection.getInputStream()));
+      message = reader.readLine();
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return string;
+    return message;
   }
 
   public void sendMessage(Socket socket, String message) throws IOException {
