@@ -23,6 +23,7 @@ public class SocketIOTest {
   public void should_ReadMessage_When_MessageIsSent() throws IOException {
     String input = "Hello\n";
     ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(input.getBytes());
+
     when(mockSocket.getInputStream()).thenReturn(mockInputStream);
     when(mockInputStream.read(any(byte[].class), anyInt(), anyInt()))
         .thenAnswer(invocation -> byteArrayInputStream.read(

@@ -27,7 +27,6 @@ public class EchoServer {
     while ((message = socketIO.readMessage(serverConnection)) != null) {
       socketIO.sendMessage(serverConnection, message);
     }
-
   }
 
   public Socket acceptClientConnectionRequest() {
