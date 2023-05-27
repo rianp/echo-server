@@ -1,7 +1,9 @@
+import java.io.InputStream
+
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
-    id("com.adarshr.test-logger") version "3.2.0"
+//    id("com.adarshr.test-logger") version "3.2.0"
 }
 
 repositories {
@@ -26,14 +28,15 @@ tasks.named<Test>("test") {
     useJUnitPlatform()
 }
 
-tasks.register("bootServer", JavaExec::class.java) {
+tasks.create<JavaExec>("bootServer") {
     mainClass.set("echo.server.ServerRunner")
     classpath = sourceSets["main"].runtimeClasspath
 }
 
-tasks.register("bootClient", JavaExec::class.java) {
+tasks.create<JavaExec>("bootClient") {
     mainClass.set("echo.client.ClientRunner")
     classpath = sourceSets["main"].runtimeClasspath
+    standardInput = System.`in`
 }
 
 //tasks.named("bootServer") {

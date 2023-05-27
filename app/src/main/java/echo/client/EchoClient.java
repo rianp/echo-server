@@ -23,6 +23,7 @@ public class EchoClient {
       if ("quit".equals(message)) {
         break;
       }
+//      console.print(message);
       socketIO.sendMessage(socket, message);
       String echo = socketIO.readMessage(socket);
       console.print(echo);

@@ -22,7 +22,7 @@ public class EchoServer {
 
   public void start() throws IOException {
     String message;
-    Socket serverConnection = this.acceptClientConnectionRequest();
+    serverConnection = this.acceptClientConnectionRequest();
     console.print("Connection established!");
     while ((message = socketIO.readMessage(serverConnection)) != null) {
       socketIO.sendMessage(serverConnection, message);
