@@ -38,7 +38,3 @@ tasks.create<JavaExec>("bootClient") {
     classpath = sourceSets["main"].runtimeClasspath
     standardInput = System.`in`
 }
-
-//tasks.named("bootServer") {
-//    finalizedBy("bootClient")
-//}

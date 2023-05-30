@@ -17,23 +17,10 @@ public class EchoServerTest {
   ServerSocket mockServerSocket = mock(ServerSocket.class);
   Socket mockServerConnection = mock(Socket.class);
   Console mockConsole = mock(Console.class);
-  EchoServer echoServer = new EchoServer(mockConsole, mockServerSocket, mockSocketIO);
+  EchoServer echoServer = new EchoServer(mockConsole, mockSocketIO, mockServerConnection);
 
   public void testSetUp() throws IOException {
     when(mockServerSocket.accept()).thenReturn(mockServerConnection);
-  }
-
-  @Test
-  @DisplayName("should print a connection message when echo server starts")
-  void should_printConnectionMessage() throws IOException {
-    testSetUp();
-    when(mockSocketIO.readMessage(mockServerConnection))
-        .thenReturn("quit")
-        .thenReturn(null);
-
-    echoServer.start();
-
-    verify(mockConsole).print("Connection established!");
   }
 
   @Test
@@ -43,7 +30,7 @@ public class EchoServerTest {
     when(mockSocketIO.readMessage(mockServerConnection))
         .thenReturn(null);
 
-    echoServer.start();
+    echoServer.run();
 
     verify(mockSocketIO).readMessage(mockServerConnection);
   }
@@ -54,7 +41,7 @@ public class EchoServerTest {
     testSetUp();
     when(mockSocketIO.readMessage(mockServerConnection)).thenReturn(null);
 
-    echoServer.start();
+    echoServer.run();
 
     verify(mockSocketIO, never()).sendMessage(mockServerConnection, "quit");
   }
@@ -67,7 +54,7 @@ public class EchoServerTest {
         .thenReturn("hello")
         .thenReturn(null);
 
-    echoServer.start();
+    echoServer.run();
 
     verify(mockSocketIO).sendMessage(mockServerConnection, "hello");
   }
