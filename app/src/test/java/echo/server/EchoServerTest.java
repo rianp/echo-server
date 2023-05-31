@@ -11,7 +11,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -66,7 +65,7 @@ public class EchoServerTest {
 
   @Test
   @DisplayName("should return messages to multiple clients when more than one client sends a message")
-  public void testMultipleClientsMessaging() throws IOException, InterruptedException {
+  public void should_sendMultipleClientsMessages() throws IOException, InterruptedException {
     ExecutorService executorService = Executors.newCachedThreadPool();
 
     // Start the server in a separate thread
@@ -84,12 +83,13 @@ public class EchoServerTest {
     int numClients = 5;
     for (int i = 0; i < numClients; i++) {
       // Start each client in a separate thread
+      int finalI = i;
       executorService.execute(() -> {
         try (Socket socket = new Socket("localhost", 49151);
              PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
-          String message = "Hello from client!";
+          String message = "Hello from client " + finalI;
           out.println(message);
           String response = in.readLine();
           assertEquals(message, response);
@@ -103,7 +103,6 @@ public class EchoServerTest {
     executorService.shutdown();
     Thread.sleep(5000);
 
-    // Stop the server
     executorService.shutdownNow();
   }
 }
