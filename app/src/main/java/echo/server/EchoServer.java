@@ -20,24 +20,19 @@ public class EchoServer implements Runnable {
 
   @Override
   public void run() {
-    String message;
-    while ((message = socketIO.readMessage(clientSocket)) != null) {
-      try {
+    try {
+      String message;
+      while ((message = socketIO.readMessage(clientSocket)) != null) {
         socketIO.sendMessage(clientSocket, message);
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    } finally {
+      try {
+        clientSocket.close();
       } catch (IOException e) {
-        throw new RuntimeException(e);
+        e.printStackTrace();
       }
     }
   }
-
-
-//  public Socket acceptClientConnectionRequest() {
-//    Socket clientSocket;
-//    try {
-//      clientSocket = this.serverSocket.accept();
-//    } catch (IOException e) {
-//      throw new RuntimeException(e);
-//    }
-//    return clientSocket;
-//  }
 }
