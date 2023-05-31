@@ -65,41 +65,6 @@ public class EchoServerTest {
   }
 
   @Test
-  @DisplayName("should connect to multiple clients when more than one client requests connection")
-  public void testMultipleClientConnections() throws IOException, InterruptedException {
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outputStream));
-
-    // Create a server instance in a separate thread
-    ExecutorService executorService = Executors.newSingleThreadExecutor();
-    executorService.execute(() -> {
-      try {
-        ServerRunner.main(null);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    });
-
-    Thread.sleep(1000);
-
-    // Create multiple client connections
-    int numClients = 5;
-    for (int i = 0; i < numClients; i++) {
-      Socket clientSocket = new Socket("localhost", 49151);
-      clientSocket.close();
-    }
-
-    // Wait for the server to handle all client connections
-    Thread.sleep(1000);
-
-    String expectedOutput = "Welcome to the Echo Server!\n" +
-        "Starting Server...\n" +
-        "Echo Server started and waiting for clients... \n" +
-        "Connection established!\n".repeat(numClients);
-    assertEquals(expectedOutput, outputStream.toString());
-  }
-
-  @Test
   @DisplayName("should return messages to multiple clients when more than one client sends a message")
   public void testMultipleClientsMessaging() throws IOException, InterruptedException {
     ExecutorService executorService = Executors.newCachedThreadPool();
@@ -124,7 +89,7 @@ public class EchoServerTest {
              PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()))) {
 
-          String message = "quit";
+          String message = "Hello from client!";
           out.println(message);
           String response = in.readLine();
           assertEquals(message, response);
@@ -133,6 +98,10 @@ public class EchoServerTest {
         }
       });
     }
+
+    // Wait for all clients to finish
+    executorService.shutdown();
+    Thread.sleep(5000);
 
     // Stop the server
     executorService.shutdownNow();

@@ -8,8 +8,8 @@ public class SocketIO {
   public String readMessage(Socket serverConnection) {
     String message = "";
     try {
-      BufferedReader reader = new BufferedReader(new InputStreamReader(serverConnection.getInputStream()));
-      message = reader.readLine();
+      BufferedReader in = new BufferedReader(new InputStreamReader(serverConnection.getInputStream()));
+      message = in.readLine();
     } catch (IOException e) {
       e.printStackTrace();
     }
