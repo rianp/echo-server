@@ -9,35 +9,30 @@ git clone git@github.com:rianp/echo-server.git
 cd echo-server
 ```
 
-<<<<<<< Updated upstream
-3. Install IntelliJ and JDK (Java Development Kit) if you haven't already. You can download IntelliJ from the official website and JDK from the Oracle website. Make sure to follow the installation instructions for your specific operating system.
+## Run In IntelliJ IDE 
 
-4. Open the project in IntelliJ:
+1. Install IntelliJ and JDK (Java Development Kit) if you haven't already. You can download IntelliJ from the official website and JDK from the Oracle website. Make sure to follow the installation instructions for your specific operating system.
+
+2. Open the project in IntelliJ:
 - Launch IntelliJ.
 - Click on "Open" or "Import Project."
 - Browse to the cloned echo-server directory and select it.
 - IntelliJ will detect the project configuration and set it up.
+- Open two terminal windows and follow the instructions below.
 
-5. Build the project using Gradle:
+## Run Using The Terminal
+
+1. In the root directory (`echo-server`), run the server:
 ```bash
-gradle build
+gradle bootServer
 ```
 
-6. Run the server:
+2. Then in a separate terminal window, run the client:
 ```bash
-=======
-3. Build the project using Gradle:
-```
-gradle build
+ gradle --console plain bootClient
 ```
 
-1. Run the server:
-```
->>>>>>> Stashed changes
-gradle run
-```
-
-**The server should now be running on localhost at port (todo: port number).**
+**The server should now be running on localhost at port 49151.**
 
 ## Testing
 **This project includes JUnit tests to ensure that the server is functioning correctly.**

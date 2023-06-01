@@ -11,8 +11,8 @@ public class Console {
   }
 
   public String inputString(String prompt) throws IOException {
-    BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
     print(prompt);
+    BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
     return userInput.readLine();
   }
 }
